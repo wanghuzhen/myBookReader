@@ -4,6 +4,7 @@ import 'package:html/parser.dart';
 import 'package:novel_reader/utils/request.dart';
 import 'package:novel_reader/model/all_model.dart';
 import 'package:toast/toast.dart';
+import 'package:novel_reader/components/LoadingView.dart';
 
 class ClassificationPage extends StatefulWidget {
   final String arguments;
@@ -17,10 +18,95 @@ class _ClassificationPageState extends State<ClassificationPage> {
   List<Classification> _classifyList = [];
   List<BookClassifyItem> _novelList = [];
   int _selectedClassifyId = 0;
+  ScrollController _scrollController;
+  int _classificationPage;
+
   @override
   void initState() {
     super.initState();
     __fetchClassifyList();
+    _classificationPage = 2;
+    _scrollController = ScrollController()
+      ..addListener(() {
+        //判断是否滑到底端，进行上拉加载更多
+        if (_scrollController.position.pixels ==
+            _scrollController.position.maxScrollExtent) {
+          _loadMore();
+        }
+      });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
+
+  Future _loadMore() async {
+    int index;
+    switch (widget.arguments) {
+      case '新笔趣阁':
+        index = 0;
+        try {
+          HttpUtils res = HttpUtils(index);
+          String _urlPath;
+          List<String> _temp = _classifyList[_selectedClassifyId].classifyUrl.split('.');
+          _urlPath = _temp[0]+'/'+(_classificationPage++).toString()+'.'+_temp[1];
+          var result =
+              await res.getInstance().get(_urlPath);
+          var document = parse(result.data.toString());
+          var bookList =
+              document.querySelector('.librarylist').querySelectorAll('li');
+//          print(bookList.length);
+          List<BookClassifyItem> temp = [];
+          for (int i = 0; i < bookList.length; i++) {
+            BookClassifyItem item = BookClassifyItem(
+              bookList[i].querySelector('.pt-ll-l>a').attributes['href'],
+              bookList[i].querySelector('.pt-ll-l>a').attributes['title'],
+              bookList[i].querySelector('.pt-ll-l>a>img').attributes['src'],
+              bookList[i]
+                  .querySelectorAll('.pt-ll-r>p')[0]
+                  .querySelectorAll('span')[1]
+                  .querySelector('a')
+                  .text
+                  .trim(),
+              bookList[i]
+                  .querySelectorAll('.pt-ll-r>p')[0]
+                  .querySelectorAll('span')[1]
+                  .querySelector('a')
+                  .attributes['href'],
+              bookList[i].querySelectorAll('.pt-ll-r>p')[1].text.trim(),
+              bookList[i]
+                  .querySelectorAll('.pt-ll-r>p')[2]
+                  .querySelector('a')
+                  .attributes['href'],
+              bookList[i]
+                  .querySelectorAll('.pt-ll-r>p')[2]
+                  .querySelector('a')
+                  .text
+                  .trim(),
+            );
+            temp.add(item);
+          }
+//          print('结果' + temp[0].lastUrl);
+          setState(() {
+            _novelList.addAll(temp);
+          });
+        } catch (e) {
+          print(e);
+        }
+        break;
+      case 'QQ阅读':
+        index = 1;
+//        HttpUtils res = HttpUtils(index);
+
+        break;
+      case '起点读书':
+        index = 2;
+//        HttpUtils res = HttpUtils(index);
+
+        break;
+    }
   }
 
   @override
@@ -207,17 +293,47 @@ class _ClassificationPageState extends State<ClassificationPage> {
     );
   }
 
+//  _buildBookClassifyList() {
+//    return Expanded(
+//      flex: 8,
+//      child: _novelList.length == 0
+//          ? Center(
+//              child: CircularProgressIndicator(),
+//            )
+//          : ListView(
+//              children: List.generate(_novelList.length, (index) {
+//                return _buildBookClassifyItem(index);
+//              }),
+//            ),
+//    );
+//  }
+  //TODO--上拉刷新
+  //添加上拉加载更多
   _buildBookClassifyList() {
     return Expanded(
       flex: 8,
-      child: ListView(
-        children: List.generate(_novelList.length, (index) {
-          return _buildBookClassifyItem(index);
-        }),
-      ),
+      child: _novelList.length == 0
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : ListView.builder(
+              controller: _scrollController,
+              itemCount: _novelList.length + 1,
+              itemBuilder: (BuildContext context, int index) {
+                if (index == _novelList.length) {
+                  return Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Center(
+                      child: LoadingView(),
+                    ),
+                  );
+                }
+                return _buildBookClassifyItem(index);
+              },
+            ),
     );
   }
-//TODO--上拉刷新
+
   _buildBookClassifyItem(int index) {
     int netApiId;
     switch (widget.arguments) {
@@ -228,10 +344,10 @@ class _ClassificationPageState extends State<ClassificationPage> {
         netApiId = 1;
         break;
       case '起点读书':
-        netApiId =2;
+        netApiId = 2;
         break;
     }
-    List<String> api=[
+    List<String> api = [
       'http://www.xbiqige.com',
       '',
       '',
@@ -242,7 +358,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
         padding: EdgeInsets.only(left: 5, right: 5, top: 5),
         child: Card(
           elevation: 3.0,
-          color: Color(0xffcfd2ce),
+          color: Color(0xffffffff),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(14.0))),
           child: Row(
@@ -251,8 +367,11 @@ class _ClassificationPageState extends State<ClassificationPage> {
                 margin: EdgeInsets.only(left: 8, right: 8),
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: Image.network(api[netApiId]+_novelList[index].bookCover,
-                        fit: BoxFit.cover, width: 92, height: 120)),
+                    child: Image.network(
+                        api[netApiId] + _novelList[index].bookCover,
+                        fit: BoxFit.cover,
+                        width: 92,
+                        height: 120)),
               ),
               Expanded(
                 child: Column(
