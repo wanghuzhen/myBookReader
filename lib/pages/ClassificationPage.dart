@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
+import 'package:novel_reader/components/book_item.dart';
 import 'package:novel_reader/utils/request.dart';
 import 'package:novel_reader/model/all_model.dart';
 import 'package:toast/toast.dart';
@@ -328,97 +329,10 @@ class _ClassificationPageState extends State<ClassificationPage> {
                     ),
                   );
                 }
-                return _buildBookClassifyItem(index);
+                return BookItem(index: index,netApiId: 0,list: _novelList,);
+//                return _buildBookClassifyItem(index);
               },
             ),
-    );
-  }
-
-  _buildBookClassifyItem(int index) {
-    int netApiId;
-    switch (widget.arguments) {
-      case '新笔趣阁':
-        netApiId = 0;
-        break;
-      case 'QQ阅读':
-        netApiId = 1;
-        break;
-      case '起点读书':
-        netApiId = 2;
-        break;
-    }
-    List<String> api = [
-      'http://www.xbiqige.com',
-      '',
-      '',
-    ];
-    return GestureDetector(
-      child: Container(
-        height: 144,
-        padding: EdgeInsets.only(left: 5, right: 5, top: 5),
-        child: Card(
-          elevation: 3.0,
-          color: Color(0xffffffff),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(14.0))),
-          child: Row(
-            children: [
-              Container(
-                margin: EdgeInsets.only(left: 8, right: 8),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.network(
-                        api[netApiId] + _novelList[index].bookCover,
-                        fit: BoxFit.cover,
-                        width: 92,
-                        height: 120)),
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-//                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    //书名/作者名
-                    Container(
-                      margin: EdgeInsets.only(top: 3, right: 3),
-                      child: Text(
-                        _novelList[index].bookName,
-                        style: TextStyle(fontSize: 17),
-                        maxLines: 2,
-                        softWrap: true,
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 3, right: 5),
-                      child: Text(
-                        '作者:' + _novelList[index].author,
-                        style: TextStyle(fontSize: 14, color: Colors.blue),
-                      ),
-                    ),
-                    //最新章节
-                    Container(
-                      margin: EdgeInsets.only(top: 4, right: 5),
-                      child: Text(
-                        '最新章节: ' + _novelList[index].lastTitle,
-                        style: TextStyle(
-                          fontSize: 14,
-                        ),
-                        maxLines: 2,
-                        softWrap: true,
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-//      color: Colors.yellow,
-      ),
-      onTap: () {
-        //TODO
-        Toast.show('尚未完成', context);
-      },
     );
   }
 }

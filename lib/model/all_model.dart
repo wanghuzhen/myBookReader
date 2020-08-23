@@ -6,6 +6,14 @@ class Classification {
   Classification(this.classifyUrl, this.classification);
 }
 
+//热门书籍
+class HostBook {
+  final String bookUrl;
+  final String bookTitle;
+
+  HostBook(this.bookUrl, this.bookTitle);
+}
+
 //搜索书籍项目
 class BookSearchItem {
   //书名
@@ -22,9 +30,11 @@ class BookSearchItem {
   final String type;
   //图书封面
   final String bookCover;
+  //最新章节更新时间
+  final String time;
 
-  BookSearchItem(this.author, this.lastUrl, this.lastTitle, this.type,
-      this.bookCover, this.bookName, this.bookUrl);
+  BookSearchItem(this.bookName, this.bookUrl, this.author, this.lastUrl,
+      this.lastTitle, this.type, this.bookCover, this.time);
 }
 
 //分类书籍项目
@@ -46,5 +56,14 @@ class BookClassifyItem {
   //最新章节标题
   final String lastTitle;
 
-  BookClassifyItem(this.bookUrl,this.bookName, this.bookCover, this.author, this.authorBookList, this.intro, this.lastUrl, this.lastTitle,);
+  BookClassifyItem(
+    this.bookUrl,
+    this.bookName,
+    this.bookCover,
+    this.author,
+    this.authorBookList,
+    this.intro,
+    this.lastUrl,
+    this.lastTitle,
+  );
 }

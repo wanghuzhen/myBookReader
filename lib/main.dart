@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:novel_reader/pages/ClassificationPage.dart';
 import 'package:novel_reader/pages/HomePage.dart';
 import 'package:novel_reader/pages/SearchPage_usage.dart';
+import 'package:novel_reader/pages/SearchResultPage.dart';
 
 void main() {
   if (Platform.isAndroid) {
@@ -21,6 +22,9 @@ class Novel extends StatelessWidget {
     '/search': (BuildContext context) => SearchPage(),
     '/classify': (BuildContext context, {arguments}) => ClassificationPage(
           arguments: arguments,
+        ),
+    '/searchResult': (BuildContext context, {arguments}) => SearchResultPage(
+          searchName: arguments,
         ),
   };
 

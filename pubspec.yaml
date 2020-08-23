@@ -27,6 +27,7 @@ dependencies:
   dio: ^3.0.9
   double_back_to_close_app: ^1.2.0
   html: ^0.14.0+3
+  shared_preferences: ^0.5.10
 
 dev_dependencies:
   flutter_test:
