@@ -10,7 +10,7 @@ class SharedPreferencesDataUtils {
   // 获取数据
   Future getUserInfo(key) async {
     SharedPreferences sp = await SharedPreferences.getInstance();
-    return sp.containsKey(key)?sp.getStringList(key):[];
+    return sp.containsKey(key)?sp.getStringList(key):null;
   }
 
   // 清除数据

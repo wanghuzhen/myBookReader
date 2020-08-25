@@ -5,7 +5,8 @@ class BookItem extends StatefulWidget {
   final int index;
   final int netApiId;
   final List list;
-  const BookItem({Key key, this.index, this.netApiId, this.list}) : super(key: key);
+  const BookItem({Key key, this.index, this.netApiId, this.list})
+      : super(key: key);
   @override
   _BookItemState createState() => _BookItemState();
 }
@@ -34,7 +35,8 @@ class _BookItemState extends State<BookItem> {
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.network(
-                        api[widget.netApiId] + widget.list[widget.index].bookCover,
+                        api[widget.netApiId] +
+                            widget.list[widget.index].bookCover,
                         fit: BoxFit.cover,
                         width: 92,
                         height: 120)),
@@ -85,7 +87,8 @@ class _BookItemState extends State<BookItem> {
       ),
       onTap: () {
         //TODO
-        Toast.show('尚未完成', context);
+        Navigator.pushNamed(context, '/introPage',
+            arguments: widget.list[widget.index].bookUrl);
       },
     );
   }

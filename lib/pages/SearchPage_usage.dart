@@ -23,8 +23,7 @@ class _SearchPageState extends State<SearchPage> {
   void initState() {
     super.initState();
     _fetchHistoryList();
-    //TODO--开启
-//    _fetchHotList();
+    _fetchHotList();
   }
 
   @override
@@ -58,9 +57,11 @@ class _SearchPageState extends State<SearchPage> {
   Future _fetchHistoryList() async {
     SharedPreferencesDataUtils sp = SharedPreferencesDataUtils();
     await sp.getUserInfo('HISTORY_BOOK_LIST').then((value) {
-      setState(() {
-        _historyList.addAll(value);
-      });
+      if (value != null) {
+        setState(() {
+          _historyList.addAll(value);
+        });
+      }
     });
   }
 
@@ -173,7 +174,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  _rightButtonClick(){
+  _rightButtonClick() {
     if (_controller.text == '') {
       Toast.show('搜索内容不可为空', context,
           backgroundRadius: 5.0, backgroundColor: Colors.black45);
@@ -185,7 +186,8 @@ class _SearchPageState extends State<SearchPage> {
           sp.setUserInfo('HISTORY_BOOK_LIST', _historyList);
         });
       }
-      Navigator.pushNamed(context, '/searchResult',arguments: _controller.text);
+      Navigator.pushNamed(context, '/searchResult',
+          arguments: _controller.text);
     }
   }
 
@@ -198,7 +200,7 @@ class _SearchPageState extends State<SearchPage> {
           sp.setUserInfo('HISTORY_BOOK_LIST', _historyList);
         });
       }
-      Navigator.pushNamed(context, '/searchResult',arguments: text);
+      Navigator.pushNamed(context, '/searchResult', arguments: text);
     }
   }
 }
@@ -263,6 +265,11 @@ class HotBookCard extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
             onPressed: () {
               //TODO--点击跳转书籍详情页
+              Navigator.pushNamed(
+                context,
+                '/introPage',
+                arguments: item.bookUrl,
+              );
             },
           );
         }).toList(),
@@ -295,7 +302,7 @@ class HistoryBookCard extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
             onPressed: () {
-              Navigator.pushNamed(context, '/searchResult',arguments: item);
+              Navigator.pushNamed(context, '/searchResult', arguments: item);
             },
           );
         }).toList(),

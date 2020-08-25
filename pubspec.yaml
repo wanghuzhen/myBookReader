@@ -56,6 +56,11 @@ flutter:
     - images/QQ阅读.png
     - images/起点读书.png
     - images/nocover.jpg
+    - images/author.png
+    - images/coming.png
+    - images/dir.png
+    - images/last.png
+    - images/time.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

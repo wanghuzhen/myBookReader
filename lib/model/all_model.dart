@@ -67,3 +67,41 @@ class BookClassifyItem {
     this.lastTitle,
   );
 }
+
+//书籍介绍
+class BookIntro {
+  //图书地址
+  final String bookUrl;
+  //书名
+  final String bookName;
+  //图书封面
+  final String bookCover;
+  //作者
+  final String author;
+  //最新章节url
+  final String lastUrl;
+  //最新章节标题
+  final String lastTitle;
+  //书籍介绍
+  final String intro;
+  //来源
+  final String coming;
+  //更新时间
+  final String time;
+  //章节数目
+  final int characterNum;
+  //目录
+  final List<String> dirList;
+
+  BookIntro(
+      this.bookUrl,
+      this.bookName,
+      this.bookCover,
+      this.author,
+      this.lastUrl,
+      this.lastTitle,
+      this.intro,
+      this.coming,
+      this.time,
+      this.characterNum, this.dirList);
+}

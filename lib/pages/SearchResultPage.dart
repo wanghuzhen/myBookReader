@@ -114,6 +114,11 @@ class _SearchResultPageState extends State<SearchResultPage> {
           borderRadius: BorderRadius.circular(20),
           onTap: () {
             //TODO
+            Navigator.pushNamed(
+              context,
+              '/introPage',
+              arguments: book.bookUrl,
+            );
           },
           child: Container(
             child: Container(
@@ -132,7 +137,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
                     ),
                     Expanded(
                         child: Container(
-                      margin: EdgeInsets.only(left: 20,top: 4.0),
+                      margin: EdgeInsets.only(left: 20, top: 4.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -180,7 +185,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
                           Container(
                             margin: EdgeInsets.only(top: 5),
                             child: Text(
-                              '最新章节：'+book.lastTitle,
+                              '最新章节：' + book.lastTitle,
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.black,
@@ -192,7 +197,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
                           Container(
                             margin: EdgeInsets.only(top: 5),
                             child: Text(
-                              '更新时间：('+book.time.split('(')[1],
+                              '更新时间：(' + book.time.split('(')[1],
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.black,

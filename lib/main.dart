@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:io';
 import 'package:novel_reader/pages/ClassificationPage.dart';
+import 'package:novel_reader/pages/DirPage.dart';
 import 'package:novel_reader/pages/HomePage.dart';
 import 'package:novel_reader/pages/SearchPage_usage.dart';
 import 'package:novel_reader/pages/SearchResultPage.dart';
+import 'package:novel_reader/pages/introduction.dart';
 
 void main() {
   if (Platform.isAndroid) {
@@ -26,6 +28,12 @@ class Novel extends StatelessWidget {
     '/searchResult': (BuildContext context, {arguments}) => SearchResultPage(
           searchName: arguments,
         ),
+    '/introPage': (BuildContext context, {arguments}) => IntroPage(
+          bookUrl: arguments,
+        ),
+    '/dirPage':(BuildContext context,{arguments})=>DirPage(
+      dirList: arguments,
+    )
   };
 
   // This widget is the root of your application.

@@ -50,14 +50,10 @@ class _ClassificationPageState extends State<ClassificationPage> {
         try {
           HttpUtils res = HttpUtils(index);
           String _urlPath;
-          List<String> _temp =
-              _classifyList[_selectedClassifyId].classifyUrl.split('.');
-          _urlPath = _temp[0] +
-              '/' +
-              (_classificationPage++).toString() +
-              '.' +
-              _temp[1];
-          var result = await res.getInstance().get(_urlPath);
+          List<String> _temp = _classifyList[_selectedClassifyId].classifyUrl.split('.');
+          _urlPath = _temp[0]+'/'+(_classificationPage++).toString()+'.'+_temp[1];
+          var result =
+              await res.getInstance().get(_urlPath);
           var document = parse(result.data.toString());
           var bookList =
               document.querySelector('.librarylist').querySelectorAll('li');
@@ -332,11 +328,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
                     ),
                   );
                 }
-                return BookItem(
-                  index: index,
-                  netApiId: 0,
-                  list: _novelList,
-                );
+                return BookItem(index: index,netApiId: 0,list: _novelList,);
 //                return _buildBookClassifyItem(index);
               },
             ),
