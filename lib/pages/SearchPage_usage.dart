@@ -16,6 +16,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _controller = TextEditingController();
+  final FocusNode verifyNode = FocusNode();
   List<HostBook> _hotList = [];
   List<String> _historyList = [];
 
@@ -30,6 +31,7 @@ class _SearchPageState extends State<SearchPage> {
   void dispose() {
     super.dispose();
     _controller.dispose();
+    verifyNode.dispose();
   }
 
   Future _fetchHotList() async {
@@ -163,7 +165,8 @@ class _SearchPageState extends State<SearchPage> {
           hideLeft: true,
           defaultText: '',
           hint: '小说名/作者名',
-          controller: _controller,
+          textController: _controller,
+          verifyNode: verifyNode,
           leftButtonClick: () {
             Navigator.pop(context, '/');
           },
@@ -186,6 +189,7 @@ class _SearchPageState extends State<SearchPage> {
           sp.setUserInfo('HISTORY_BOOK_LIST', _historyList);
         });
       }
+      verifyNode.unfocus();
       Navigator.pushNamed(context, '/searchResult',
           arguments: _controller.text);
     }

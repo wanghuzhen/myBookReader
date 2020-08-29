@@ -32,7 +32,7 @@ class Novel extends StatelessWidget {
           bookUrl: arguments,
         ),
     '/dirPage':(BuildContext context,{arguments})=>DirPage(
-      dirList: arguments,
+      catalogueList: arguments,
     )
   };
 

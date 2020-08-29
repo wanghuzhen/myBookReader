@@ -5,7 +5,8 @@ class SearchBar extends StatefulWidget {
   final bool hideLeft;
   final String hint;
   final String defaultText;
-  final TextEditingController controller;
+  final TextEditingController textController;
+  final FocusNode verifyNode;
   final void Function() leftButtonClick;
   final void Function() rightButtonClick;
   final void Function() inputBoxClick;
@@ -17,11 +18,11 @@ class SearchBar extends StatefulWidget {
     this.hideLeft,
     this.hint,
     this.defaultText,
-    this.controller,
+    this.textController,
     this.leftButtonClick,
     this.rightButtonClick,
     this.inputBoxClick,
-    this.onSubmit,
+    this.onSubmit, this.verifyNode,
   });
 
   @override
@@ -33,7 +34,7 @@ class _SearchBarState extends State<SearchBar> {
   void initState() {
     if (widget.defaultText != null) {
       setState(() {
-        widget.controller.text = widget.defaultText;
+        widget.textController.text = widget.defaultText;
       });
     }
     super.initState();
@@ -82,7 +83,8 @@ class _SearchBarState extends State<SearchBar> {
           Expanded(
               flex: 1,
               child: TextField(
-                controller: widget.controller,
+                focusNode: widget.verifyNode,
+                controller: widget.textController,
                 autofocus: false,
                 style: TextStyle(
                     fontSize: 18.0,
@@ -103,7 +105,7 @@ class _SearchBarState extends State<SearchBar> {
                 color: Colors.grey,
               ), () {
             setState(() {
-              widget.controller.clear();
+              widget.textController.clear();
             });
           })
         ],

@@ -253,7 +253,10 @@ class _IntroPageState extends State<IntroPage> {
                                     Navigator.pushNamed(
                                       context,
                                       '/dirPage',
-                                      arguments: _intro.dirList,
+                                      arguments: {
+                                        'catalogue': _intro.dirList,
+                                        'currentIndex': 0,
+                                      },
                                     );
                                   },
                                   child: Text(
