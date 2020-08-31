@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:toast/toast.dart';
 
 class BookItem extends StatefulWidget {
   final int index;
@@ -87,8 +86,10 @@ class _BookItemState extends State<BookItem> {
       ),
       onTap: () {
         //TODO
-        Navigator.pushNamed(context, '/introPage',
-            arguments: widget.list[widget.index].bookUrl);
+        Navigator.pushNamed(context, '/introPage', arguments: {
+          'bookUrl': widget.list[widget.index].bookUrl,
+          'currentIndex': 0,
+        });
       },
     );
   }

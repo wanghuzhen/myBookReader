@@ -1,5 +1,6 @@
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
+import 'package:novel_reader/components/book_shelf.dart';
 import 'package:novel_reader/components/find_recommend.dart';
 import 'package:novel_reader/components/my_drawer.dart';
 import 'package:novel_reader/components/pop_menu_button.dart';
@@ -43,12 +44,7 @@ class HomePage extends StatelessWidget {
             ),
             child: TabBarView(
               children: <Widget>[
-                //TODO--发现和书阁
-                Icon(
-                  Icons.android,
-                  size: 200,
-                  color: Colors.grey,
-                ),
+                BookShelfCmp(),
                 FindAndRecommend(),
               ],
             ),

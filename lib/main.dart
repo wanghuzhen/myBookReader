@@ -29,7 +29,7 @@ class Novel extends StatelessWidget {
           searchName: arguments,
         ),
     '/introPage': (BuildContext context, {arguments}) => IntroPage(
-          bookUrl: arguments,
+          book: arguments,
         ),
     '/dirPage':(BuildContext context,{arguments})=>DirPage(
       catalogueList: arguments,

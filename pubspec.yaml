@@ -61,6 +61,7 @@ flutter:
     - images/dir.png
     - images/last.png
     - images/time.png
+    - images/current.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

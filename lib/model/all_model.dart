@@ -7,11 +7,11 @@ class Classification {
 }
 
 //热门书籍
-class HostBook {
+class HotBook {
   final String bookUrl;
   final String bookTitle;
 
-  HostBook(this.bookUrl, this.bookTitle);
+  HotBook(this.bookUrl, this.bookTitle);
 }
 
 //搜索书籍项目

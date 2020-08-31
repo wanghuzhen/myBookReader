@@ -108,9 +108,10 @@ class _DirPageState extends State<DirPage> {
               children: [
                 ListTile(
                   title: Text(
-                      widget.catalogueList['catalogue'][index].split('/')[0]),
+                      widget.catalogueList['catalogue'][index].split('+')[0]),
                   onTap: () {
                     //TODO 跳转阅读页面
+                    print(widget.catalogueList['catalogue'][index].split('+')[1]);
                   },
                 ),
                 Divider(

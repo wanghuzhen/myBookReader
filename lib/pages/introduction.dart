@@ -2,23 +2,39 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
+import 'package:novel_reader/components/intro_toolbar.dart';
 import 'package:novel_reader/model/all_model.dart';
 import 'package:novel_reader/utils/request.dart';
 
 class IntroPage extends StatefulWidget {
-  final String bookUrl;
+  final Map book;
 
-  const IntroPage({Key key, this.bookUrl}) : super(key: key);
+  const IntroPage({Key key, this.book}) : super(key: key);
   @override
   _IntroPageState createState() => _IntroPageState();
 }
 
 class _IntroPageState extends State<IntroPage> {
   BookIntro _intro;
+  Map shelfBook = Map();
+  /*
+  图书地址 bookUrl;
+  书名 bookName;
+  图书封面 bookCover;
+  作者 author;
+  最新章节url lastUrl;
+  最新章节标题 lastTitle;
+  书籍介绍 intro;
+  来源 coming;
+  更新时间 time;
+  章节数目 characterNum;
+  目录 dirList;
+  当前章节 currentIndex;
+   */
 
   @override
   void initState() {
-    _fetchIntro(widget.bookUrl);
+    _fetchIntro(widget.book['bookUrl']);
     super.initState();
   }
 
@@ -40,7 +56,7 @@ class _IntroPageState extends State<IntroPage> {
                 .querySelectorAll('div>ul>li>a')[i]
                 .text
                 .trim() +
-            '/' +
+            '+' +
             document
                 .querySelector('.fulldir')
                 .querySelectorAll('div>ul>li>a')[i]
@@ -76,6 +92,19 @@ class _IntroPageState extends State<IntroPage> {
 //        document.querySelector('.fulldir').querySelectorAll('div')[1].querySelectorAll('ul>li').length-1
         );
       });
+      shelfBook['bookUrl'] = _intro.bookUrl;
+      shelfBook['bookName'] = _intro.bookName;
+      shelfBook['bookCover'] = _intro.bookCover;
+      shelfBook['author'] = _intro.author;
+      shelfBook['lastUrl'] = _intro.lastUrl;
+      shelfBook['lastTitle'] = _intro.lastTitle;
+      shelfBook['intro'] = _intro.intro;
+      shelfBook['coming'] = _intro.coming;
+      shelfBook['time'] = _intro.time;
+      shelfBook['characterNum'] = _intro.characterNum;
+      shelfBook['dirList'] = _intro.dirList;
+      shelfBook['currentIndex'] = widget.book['currentIndex']??0;
+
     } catch (e) {
       print(e);
     }
@@ -249,13 +278,13 @@ class _IntroPageState extends State<IntroPage> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    //TODO
                                     Navigator.pushNamed(
                                       context,
                                       '/dirPage',
                                       arguments: {
                                         'catalogue': _intro.dirList,
-                                        'currentIndex': 0,
+                                        'currentIndex':
+                                            widget.book['currentIndex'] ?? 0,
                                       },
                                     );
                                   },
@@ -288,33 +317,8 @@ class _IntroPageState extends State<IntroPage> {
                     ),
                     Align(
                       alignment: Alignment(0.0, 1.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: FlatButton(
-                              child: Text(
-                                '加入',
-                                style: TextStyle(
-                                    fontSize: 18.0, color: Colors.black),
-                              ),
-                              onPressed: () {
-                                //TODO
-                              },
-                            ),
-                          ),
-                          Expanded(
-                            child: FlatButton(
-                              child: Text(
-                                '阅读',
-                                style: TextStyle(
-                                    fontSize: 18.0, color: Colors.black),
-                              ),
-                              onPressed: () {
-                                //TODO
-                              },
-                            ),
-                          ),
-                        ],
+                      child: IntroToolbar(
+                        shelfBook: shelfBook,
                       ),
                     )
                   ],

@@ -17,7 +17,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _controller = TextEditingController();
   final FocusNode verifyNode = FocusNode();
-  List<HostBook> _hotList = [];
+  List<HotBook> _hotList = [];
   List<String> _historyList = [];
 
   @override
@@ -41,9 +41,9 @@ class _SearchPageState extends State<SearchPage> {
       var document = parse(result.data.toString());
       var hostList =
           document.querySelector('.rightlist').querySelectorAll('li');
-      List<HostBook> temp = [];
+      List<HotBook> temp = [];
       for (int i = 0; i < hostList.length; i++) {
-        HostBook item = HostBook(
+        HotBook item = HotBook(
             hostList[i].querySelectorAll('a')[1].attributes['href'],
             hostList[i].querySelectorAll('a')[1].attributes['title']);
         temp.add(item);
@@ -268,11 +268,13 @@ class HotBookCard extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
             onPressed: () {
-              //TODO--点击跳转书籍详情页
               Navigator.pushNamed(
                 context,
                 '/introPage',
-                arguments: item.bookUrl,
+                arguments: {
+                  'bookUrl': item.bookUrl,
+                  'currentIndex': 0,
+                },
               );
             },
           );

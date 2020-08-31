@@ -113,11 +113,13 @@ class _SearchResultPageState extends State<SearchResultPage> {
         child: InkWell(
           borderRadius: BorderRadius.circular(20),
           onTap: () {
-            //TODO
             Navigator.pushNamed(
               context,
               '/introPage',
-              arguments: book.bookUrl,
+              arguments: {
+                'bookUrl': book.bookUrl,
+                'currentIndex': 0,
+              },
             );
           },
           child: Container(
