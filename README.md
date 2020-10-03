@@ -10,3 +10,4 @@ flutter版本为1.22.0（时间：2020.10.03，距离上次更新2天，最新�
 
 ##运行界面
 ![Image text]
+(https://github.com/wanghuzhen/myBookReader/blob/master/screen_shot/Screenshot_1601715253.png)
