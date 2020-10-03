@@ -10,4 +10,14 @@ flutter版本为1.22.0（时间：2020.10.03，距离上次更新2天，最新�
 
 ##运行界面
 
-![Image text](https://github.com/wanghuzhen/myBookReader/blob/master/screen_shot/Screenshot_1601715253.png)
+![效果](https://github.com/wanghuzhen/myBookReader/blob/master/screen_shot/Screenshot_1601715253.png)
+![效果](https://github.com/wanghuzhen/myBookReader/blob/master/screen_shot/Screenshot_1601715260.png)
+![效果](https://github.com/wanghuzhen/myBookReader/blob/master/screen_shot/Screenshot_1601715263.png)
+![效果](https://github.com/wanghuzhen/myBookReader/blob/master/screen_shot/Screenshot_1601715277.png)
+![效果](https://github.com/wanghuzhen/myBookReader/blob/master/screen_shot/Screenshot_1601715291.png)
+![效果](https://github.com/wanghuzhen/myBookReader/blob/master/screen_shot/Screenshot_1601715298.png)
+![效果](https://github.com/wanghuzhen/myBookReader/blob/master/screen_shot/Screenshot_1601715320.png)
+![效果](https://github.com/wanghuzhen/myBookReader/blob/master/screen_shot/Screenshot_1601715334.png)
+![效果](https://github.com/wanghuzhen/myBookReader/blob/master/screen_shot/Screenshot_1601715338.png)
+![效果](https://github.com/wanghuzhen/myBookReader/blob/master/screen_shot/Screenshot_1601715351.png)
+![效果](https://github.com/wanghuzhen/myBookReader/blob/master/screen_shot/Screenshot_1601715355.png)
