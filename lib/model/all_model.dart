@@ -1,3 +1,9 @@
+/*
+sharedpreference 插件不能保存自定义实体类，，但是能保存字符串列表。
+可以把实体类转换成json字符串，然后按照列表保存。
+但是dart实体类和json互转很麻烦，所以有的部分直接用map类型存储数据。Map转json很方便
+ */
+
 //分类结果
 class Classification {
   final String classifyUrl;
@@ -105,3 +111,4 @@ class BookIntro {
       this.time,
       this.characterNum, this.dirList);
 }
+

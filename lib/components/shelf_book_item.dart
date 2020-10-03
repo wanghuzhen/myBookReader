@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:novel_reader/reader/ReadPage.dart';
 
 class ShelfBookItem extends StatefulWidget {
   final Map bookItem;
@@ -33,7 +34,15 @@ class _ShelfBookItemState extends State<ShelfBookItem> {
       height: 144,
       child: GestureDetector(
         onTap: () {
-          print(widget.bookItem['bookName']);
+          //todo
+          // print(widget.bookItem['bookName']);
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return ReadPage(
+              name: widget.bookItem['bookName'],
+              bookList: widget.bookItem['dirList'],
+              index: widget.bookItem['currentIndex'],
+            );
+          }));
         },
         onLongPress: () {
           Navigator.pushNamed(

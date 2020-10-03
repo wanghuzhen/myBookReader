@@ -14,7 +14,7 @@ description: A new Flutter application.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.8.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -62,6 +62,15 @@ flutter:
     - images/last.png
     - images/time.png
     - images/current.png
+    - images/read_bg.png
+    - images/pub_back_gray.png
+    - images/read_icon_more.png
+    - images/read_icon_catalog.png
+    - images/read_icon_brightness.png
+    - images/read_icon_font.png
+    - images/read_icon_setting.png
+    - images/read_icon_chapter_previous.png
+    - images/read_icon_chapter_next.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
